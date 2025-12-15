@@ -1,3 +1,8 @@
+# TODO
+
+- Convert modls to store currency amounts as integer cents
+  Convert in store.
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

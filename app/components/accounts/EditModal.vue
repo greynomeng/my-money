@@ -13,12 +13,12 @@ const emit = defineEmits(["close"]);
 const accountStore = useAccountStore();
 
 const schema = z.object({
-  accno: z.string(),
+  accNo: z.string(),
   name: z.string(),
   owner: z.string(),
   type: z.string(),
-  opening_balance: z.string(), // until decimal number entry fixed
-  current_balance: z.number().multipleOf(0.01)
+  openingBalance: z.string(), // until decimal number entry fixed
+  currentBalance: z.number().multipleOf(0.01)
 });
 
 const open = ref(false);
@@ -57,7 +57,7 @@ const onCancel = async () => {
         @submit="onSubmit"
       >
         <UFormField label="Account No." placeholder="xxx-xxx" name="accno">
-          <UInput v-model="account.accno" class="w-full" />
+          <UInput v-model="account.accNo" class="w-full" />
         </UFormField>
         <UFormField label="Account Name" placeholder="xxx-xxx" name="name">
           <UInput v-model="account.name" class="w-full" />
@@ -77,14 +77,14 @@ const onCancel = async () => {
           placeholder="xxx-xxx"
           name="acc_opening_balance"
         >
-          <UInput v-model="account.opening_balance" class="w-full" />
+          <UInput v-model="account.openingBalance" class="w-full" />
         </UFormField>
         <UFormField
           label="Current Balance"
           placeholder="xxx-xxx"
           name="acc_current_balance"
         >
-          <UInput v-model="account.current_balance" class="w-full" />
+          <UInput v-model="account.currentBalance" class="w-full" />
         </UFormField>
         <!-- 
           Decimal/Currency loose the decimal bits

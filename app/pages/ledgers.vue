@@ -39,6 +39,7 @@ const columns = [
 
 watch(selectedAccount, async (newValue, oldValue) => {
   // console.log(`Selected value changed from "${oldValue}" to "${newValue}"`);
+
   // Added nextTick() to ensure select closes when fetching from store.
   await nextTick();
   transactionStore.fetchTransactions(newValue);

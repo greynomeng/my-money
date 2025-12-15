@@ -67,6 +67,7 @@ const treeItems = ref([
     </template>
 
     <template #body>
+      <pre>{{ useAccountStore.accounts }}</pre>
       <div class="flex">
         <UTree :items="treeItems" />
       </div>
