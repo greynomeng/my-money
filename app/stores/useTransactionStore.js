@@ -25,9 +25,31 @@ export const useTransactionStore = defineStore("transaction", () => {
     }
   }
 
+  // getters
+  const tableData = computed(() => {
+    return transactions.value.map((trx) => {
+      if (parseFloat(trx.amount) > 0) {
+        return {
+          ...trx,
+          date: formattedDate(trx.date),
+          payee: trx.payee_id.name,
+          deposit: parseFloat(trx.amount)
+        };
+      } else if (parseFloat(trx.amount) < 0) {
+        return {
+          ...trx,
+          date: formattedDate(trx.date),
+          payee: trx.payee_id.name,
+          payment: parseFloat(-trx.amount)
+        };
+      }
+    });
+  });
+
   return {
     transactions,
     transaction,
-    fetchTransactions
+    fetchTransactions,
+    tableData
   };
 });

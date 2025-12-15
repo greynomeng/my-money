@@ -7,12 +7,12 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const accountId = query.account;
     const objectId = new ObjectId(accountId);
-    const accounts = await Transaction.find({ account_id: objectId })
+    const transactions = await Transaction.find({ account_id: objectId })
       .populate("payee_id")
       .populate("category_id");
     return {
       statusCode: 200,
-      data: accounts
+      data: transactions
     };
   } catch (error) {
     throw createError({

@@ -24,7 +24,7 @@ export const Transaction = defineMongooseModel({
       require: true
     },
     amount: {
-      type: mongoose.Types.Decimal128,
+      type: String,
       required: true
     },
     memo: {

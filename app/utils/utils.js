@@ -30,3 +30,9 @@ export function buildTreeFromPaths(paths) {
 
   return tree;
 }
+
+import { useDateFormat } from "@vueuse/core";
+
+export function formattedDate(date) {
+  return useDateFormat(date, "D MMM, YYYY").value;
+}

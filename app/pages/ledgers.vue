@@ -14,8 +14,33 @@ const accountItems = computed(() => {
 
 const selectedAccount = ref(null);
 
-watch(selectedAccount, (newValue, oldValue) => {
+const columns = [
+  {
+    accessorKey: "date",
+    header: "Date"
+  },
+  {
+    accessorKey: "payee",
+    header: "Details"
+  },
+  {
+    accessorKey: "payment",
+    header: "Payment"
+  },
+  {
+    accessorKey: "deposit",
+    header: "Deposit"
+  },
+  {
+    accessorKey: "",
+    header: "Balance"
+  }
+];
+
+watch(selectedAccount, async (newValue, oldValue) => {
   // console.log(`Selected value changed from "${oldValue}" to "${newValue}"`);
+  // Added nextTick() to ensure select closes when fetching from store.
+  await nextTick();
   transactionStore.fetchTransactions(newValue);
 });
 </script>
@@ -27,11 +52,6 @@ watch(selectedAccount, (newValue, oldValue) => {
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
-
-        <template #right>
-          ADD TRANSACTION
-          <!-- <AccountsAddModal /> -->
-        </template>
       </UDashboardNavbar>
 
       <UDashboardToolbar>
@@ -42,13 +62,14 @@ watch(selectedAccount, (newValue, oldValue) => {
             class="w-96"
           />
         </template>
+        <template #right>ADD TRANSACTION</template>
       </UDashboardToolbar>
     </template>
 
     <template #body>
-      <pre>{{ selectedAccount }}</pre>
-      <pre>{{ transactionStore.transactions }}</pre>
-      <div class="flex">Transaction Table - Scrollable</div>
+      <div class="flex">
+        <UTable :columns="columns" :data="transactionStore.tableData" />
+      </div>
     </template>
     <template #footer>
       <div class="flex">Transaction Form</div>
