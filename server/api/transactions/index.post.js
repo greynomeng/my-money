@@ -1,8 +1,10 @@
+import { Transaction } from "#imports";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const newTransaction = await prisma.Transaction.create(body);
+    const newTransaction = await Transaction.create(body);
     return {
       success: true,
       data: newTransaction

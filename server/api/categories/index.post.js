@@ -1,8 +1,10 @@
+import { Category } from "#imports";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const newCategory = await prisma.Category.create(body);
+    const newCategory = await Category.create(body);
     return {
       success: true,
       data: newCategory

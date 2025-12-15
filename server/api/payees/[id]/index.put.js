@@ -1,9 +1,11 @@
+import { Payee } from "#imports";
+
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   const body = await readBody(event);
 
   try {
-    const updatedPayee = await prisma.Payee.update(body, { where: { id: id } });
+    const updatedPayee = await Payee.findByIdAndUpdate(id, body);
     return {
       success: true,
       data: updatedPayee

@@ -1,12 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { Payee } from "#imports";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const newPayee = await prisma.Payee.create({ data: body });
+    const newPayee = await Payee.create(body);
     return {
       success: true,
       data: newPayee

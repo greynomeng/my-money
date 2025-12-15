@@ -1,11 +1,11 @@
+import { Account } from "#imports";
+
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   const body = await readBody(event);
 
   try {
-    const updatedAccount = await prisma.Account.update(body, {
-      where: { id: id }
-    });
+    const updatedAccount = await Account.findByIdAndUpdate(id, body);
     return {
       success: true,
       data: updatedAccount

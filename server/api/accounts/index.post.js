@@ -1,10 +1,13 @@
+import { Account } from "#imports";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const newAccount = await prisma.Account.create(body);
+    const newAccount = await Account.create(body);
     return {
-      success: true,
+      statusCode: 201,
+      message: "Account created",
       data: newAccount
     };
   } catch (error) {

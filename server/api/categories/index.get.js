@@ -1,6 +1,8 @@
+import { Category } from "#imports";
+
 export default defineEventHandler(async (event) => {
   try {
-    const categories = await prisma.Category.findAll();
+    const categories = await Category.find();
     return {
       success: true,
       data: categories

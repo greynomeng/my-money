@@ -8,7 +8,7 @@ const accountItems = computed(() => {
   return accountStore.accounts.map((acc) => ({
     ...acc,
     label: acc.name,
-    value: acc.id
+    value: acc._id
   }));
 });
 

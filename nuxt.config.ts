@@ -2,7 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@pinia/nuxt"],
+  modules: ["@nuxt/ui", "@pinia/nuxt", "nuxt-mongoose"],
 
-  css: ["~/assets/css/main.css"]
+  css: ["~/assets/css/main.css"],
+
+  mongoose: {
+    uri: process.env.MONGODB_URI,
+    options: {},
+    modelsDir: "models",
+    devtools: true
+  }
 });

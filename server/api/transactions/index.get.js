@@ -1,14 +1,17 @@
+import { Transaction } from "#imports";
+import mongoose from "mongoose";
+const { ObjectId } = mongoose.Types;
+
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
     const accountId = query.account;
-    const accounts = await prisma.Transaction.findAll({
-      where: {
-        account_id: accountId
-      }
-    });
+    const objectId = new ObjectId(accountId);
+    const accounts = await Transaction.find({ account_id: objectId })
+      .populate("payee_id")
+      .populate("category_id");
     return {
-      success: true,
+      statusCode: 200,
       data: accounts
     };
   } catch (error) {

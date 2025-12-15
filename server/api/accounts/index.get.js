@@ -1,10 +1,10 @@
+import { Account } from "#imports";
+
 export default defineEventHandler(async (event) => {
   try {
-    const accounts = await prisma.Account.findAll({
-      order: [["name", "ASC"]]
-    });
+    const accounts = await Account.find().sort({ name: 1 });
     return {
-      success: true,
+      statusCode: 200,
       data: accounts
     };
   } catch (error) {
