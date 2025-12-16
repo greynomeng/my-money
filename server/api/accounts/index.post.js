@@ -2,6 +2,7 @@ import { Account } from "#imports";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  console.log(body);
 
   try {
     const newAccount = await Account.create(body);

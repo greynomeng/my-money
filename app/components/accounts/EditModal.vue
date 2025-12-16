@@ -77,14 +77,22 @@ const onCancel = async () => {
           placeholder="xxx-xxx"
           name="acc_opening_balance"
         >
-          <UInput v-model="account.openingBalance" class="w-full" />
+          <UInput
+            type="number"
+            v-model="account.openingBalance"
+            class="w-full"
+          />
         </UFormField>
         <UFormField
           label="Current Balance"
           placeholder="xxx-xxx"
           name="acc_current_balance"
         >
-          <UInput v-model="account.currentBalance" class="w-full" />
+          <UInput
+            type="number"
+            v-model="account.currentBalance"
+            class="w-full"
+          />
         </UFormField>
         <!-- 
           Decimal/Currency loose the decimal bits

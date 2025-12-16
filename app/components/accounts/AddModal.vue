@@ -5,33 +5,32 @@ import { useAccountStore } from "#imports";
 const accountStore = useAccountStore();
 
 const schema = z.object({
-  accno: z.string(),
+  accNo: z.string(),
   name: z.string(),
   owner: z.string(),
   type: z.string(),
-  opening_balance: z.string(),
-  current_balance: z.string() // until decimal number entry fixed
-  // acc_opening_balance: z.number().multipleOf(0.01)
+  openingBalance: z.string(),
+  currentBalance: z.string()
 });
 
 const open = ref(false);
 
 const state = reactive({
-  accno: "",
+  accNo: "",
   name: "",
   owner: "",
   type: "",
-  opening_balance: "",
-  current_balance: ""
+  openingBalance: "",
+  currentBalance: ""
 });
 
 const resetForm = () => {
-  state.accno = "";
+  state.accNo = "";
   state.name = "";
   state.owner = "";
   state.type = "";
-  state.opening_balance = "";
-  state.current_balance = "";
+  state.openingBalance = "";
+  state.currentBalance = "";
 };
 
 const toast = useToast();
@@ -62,8 +61,8 @@ async function onSubmit(event) {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormField label="Account No." placeholder="xxx-xxx" name="accno">
-          <UInput v-model="state.accno" class="w-full" />
+        <UFormField label="Account No." placeholder="xxx-xxx" name="accNo">
+          <UInput v-model="state.accNo" class="w-full" />
         </UFormField>
         <UFormField label="Account Name" placeholder="xxx-xxx" name="name">
           <UInput v-model="state.name" class="w-full" />
@@ -81,16 +80,16 @@ async function onSubmit(event) {
         <UFormField
           label="Opening Balance"
           placeholder="xxx-xxx"
-          name="opening_balance"
+          name="openingBalance"
         >
-          <UInput v-model="state.opening_balance" class="w-full" />
+          <UInput v-model="state.openingBalance" class="w-full" />
         </UFormField>
         <UFormField
           label="Current Balance"
           placeholder="xxx-xxx"
-          name="current_balance"
+          name="currentBalance"
         >
-          <UInput v-model="state.current_balance" class="w-full" />
+          <UInput v-model="state.currentBalance" class="w-full" />
         </UFormField>
         <!-- 
           Decimal/Currency loose the decimal bits
