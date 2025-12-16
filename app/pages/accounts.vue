@@ -8,6 +8,8 @@ await accountStore.fetchAccounts();
 
 const overlay = useOverlay(AccountsEditModal);
 
+const disabled = ref(true);
+
 const handleSelect = (acc) => {
   const modal = overlay.create(AccountsEditModal, {
     props: {

@@ -63,7 +63,9 @@ watch(selectedAccount, async (newValue, oldValue) => {
             class="w-96"
           />
         </template>
-        <template #right>ADD TRANSACTION</template>
+        <template #right
+          ><TransactionsAddModal :disabled="selectedAccount === null"
+        /></template>
       </UDashboardToolbar>
     </template>
 
