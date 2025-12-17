@@ -6,6 +6,11 @@ const TransactionSchema = new mongoose.Schema(
       type: Date,
       required: true
     },
+    accountId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Account",
+      require: true
+    },
     payeeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Payee",

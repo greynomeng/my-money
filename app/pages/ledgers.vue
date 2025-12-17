@@ -1,4 +1,6 @@
 <script setup>
+import { header } from "#build/ui";
+
 const accountStore = useAccountStore();
 accountStore.fetchAccounts();
 
@@ -32,7 +34,7 @@ const columns = [
     header: "Deposit"
   },
   {
-    accessorKey: "",
+    accessorKey: "balance",
     header: "Balance"
   }
 ];
@@ -63,19 +65,33 @@ watch(selectedAccount, async (newValue, oldValue) => {
             class="w-96"
           />
         </template>
-        <template #right
-          ><TransactionsAddModal :disabled="selectedAccount === null"
-        /></template>
+        <template #right>
+          <TransactionsAddModal :disabled="selectedAccount === null" />
+        </template>
       </UDashboardToolbar>
     </template>
 
     <template #body>
-      <div class="flex">
-        <UTable :columns="columns" :data="transactionStore.tableData" />
+      <div class="flex mt-8">
+        <UTable :columns="columns" :data="transactionStore.tableData">
+          <template #payment-cell="{ row }">
+            <div class="flex justify-end">
+              {{ row.original.payment }}
+            </div>
+          </template>
+          <template #deposit-cell="{ row }">
+            <div class="flex justify-end">
+              {{ row.original.deposit }}
+            </div>
+          </template>
+          <template #balance-cell="{ row }">
+            <div class="flex justify-end">
+              {{ row.original.balance }}
+            </div>
+          </template>
+        </UTable>
       </div>
-    </template>
-    <template #footer>
-      <div class="flex">Transaction Form</div>
+      <!-- <pre>{{ transactionStore.tableData }}</pre> -->
     </template>
   </UDashboardPanel>
 </template>

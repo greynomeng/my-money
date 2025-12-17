@@ -33,14 +33,14 @@ export const useTransactionStore = defineStore("transaction", () => {
           ...trx,
           date: formattedDate(trx.date),
           payee: trx.payeeId.name,
-          deposit: parseFloat(trx.amountCents)
+          deposit: parseFloat(trx.amount).toFixed(2)
         };
       } else if (parseFloat(trx.amountCents) < 0) {
         return {
           ...trx,
           date: formattedDate(trx.date),
           payee: trx.payeeId.name,
-          payment: parseFloat(-trx.amountCents)
+          payment: parseFloat(-trx.amount).toFixed(2)
         };
       }
     });
