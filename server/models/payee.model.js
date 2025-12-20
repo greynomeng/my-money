@@ -6,7 +6,8 @@ export const Payee = defineMongooseModel({
   schema: {
     name: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     }
   },
   options: {

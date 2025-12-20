@@ -63,7 +63,7 @@ const getRowItems = (row) => {
       icon: "lucide:trash-2",
       color: "error",
       onSelect: () => {
-        handleDeletePayee(row.original.id);
+        handleDeletePayee(row.original._id);
       }
     }
   ];

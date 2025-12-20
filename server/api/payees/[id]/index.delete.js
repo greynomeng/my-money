@@ -1,25 +1,18 @@
-// // import prisma from "~~/prisma/generated/client";
-// import { PrismaClient } from "~~/prisma/generated/client";
+import { Payee } from "~~/server/models/payee.model";
 
-// export default defineEventHandler(async (event) => {
-//   const prisma = new PrismaClient();
-//   const id = event.context.params.id;
+export default defineEventHandler(async (event) => {
+  const id = event.context.params?.id;
 
-//   try {
-//     const updatePayee = await prisma.payee.delete({
-//       where: {
-//         id: parseInt(id)
-//       }
-//     });
-//     return {
-//       success: true,
-//       data: updatePayee
-//     };
-//   } catch (error) {
-//     throw createError({
-//       statusCode: 500,
-//       message: `Failed to delete payee: ${error}`
-//     });
-//   } finally {
-//   }
-// });
+  try {
+    await Payee.findByIdAndDelete(id);
+    return {
+      statusCode: 204,
+      statusMessage: "Payee successfuly deleted"
+    };
+  } catch (error) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: `Error deleteing payee: ${error.message}`
+    });
+  }
+});

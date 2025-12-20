@@ -47,7 +47,7 @@ export const usePayeeStore = defineStore("payee", () => {
         color: "error"
       });
     } finally {
-      // fetchPayees();
+      fetchPayees();
       loading.value = false;
     }
   }
@@ -91,8 +91,11 @@ export const usePayeeStore = defineStore("payee", () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      await fetchPayees();
     }
   }
+
   return {
     loading,
     payee,

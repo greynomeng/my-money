@@ -30,7 +30,7 @@ const AccountSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collation: "accounts"
+    collection: "accounts"
   }
 );
 
