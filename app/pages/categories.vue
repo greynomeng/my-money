@@ -1,11 +1,15 @@
 <script setup>
 import { CategoriesAddModal } from "#components";
 import { useCategoryStore } from "#imports";
+import { useTreeBuilder } from "~/composables/useTreeBuuilder";
+// import { buildTree } from "#imports";
 
 const categoryStore = useCategoryStore();
 categoryStore.fetchCategories();
 
-const treeItems = buildTreeFromPaths(categoryStore.catNameList);
+const treeBuilder = useTreeBuilder();
+const expenseTreeItems = treeBuilder.buildTree(categoryStore.expenseCategories);
+console.log(expenseTreeItems);
 
 const overlay = useOverlay();
 const modal = overlay.create(CategoriesAddModal);
@@ -14,6 +18,21 @@ const handleNewCategory = () => {
   const instance = modal.open();
   console.log("instance:", instance);
 };
+
+const handleSelect = (cat) => {};
+
+const treeItems = ref([
+  // {
+  //   label: "Income",
+  //   deffaultExpanded: true,
+  //   children: incomeItems
+  // },
+  {
+    label: "Expense",
+    deffaultExpanded: true,
+    children: expenseTreeItems
+  }
+]);
 </script>
 
 <template>
@@ -35,9 +54,7 @@ const handleNewCategory = () => {
     </template>
 
     <template #body>
-      <div class="flex">
-        <UTree :items="treeItems" />
-      </div>
+      <div class="flex"><UTree :items="treeItems" /></div>
     </template>
   </UDashboardPanel>
 </template>

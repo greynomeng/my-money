@@ -1,3 +1,23 @@
+export function buildTree(items, parent) {
+  return items
+    .filter((item) => item.parent === parent)
+    .map((item) => {
+      console.log("item:", item);
+      const children = buildTree(items, item._id.toString());
+      const treeItem = {
+        label: item.name,
+        id: item._id.toString()
+        // Add defaultExpanded: true if you want items initially open
+      };
+
+      if (children.length > 0) {
+        treeItem.children = children;
+      }
+
+      return treeItem;
+    });
+}
+
 export function buildTreeFromPaths(paths) {
   const tree = [];
   const map = new Map(); // A map to hold references to existing nodes

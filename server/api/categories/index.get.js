@@ -2,7 +2,7 @@ import { Category } from "#imports";
 
 export default defineEventHandler(async (event) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find().sort({ name: 1 });
     return {
       success: true,
       data: categories

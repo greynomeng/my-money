@@ -1,6 +1,7 @@
 # TODO
 
-- Convert modls to store currency amounts as integer cents
+- Categories!!!
+- Convert models to store currency amounts as integer cents
   Convert in store.
 
 # Nuxt Minimal Starter

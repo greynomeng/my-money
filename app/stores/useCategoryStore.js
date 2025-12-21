@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { buildTreeFromPaths } from "~/utils/utils";
 
 export const useCategoryStore = defineStore("category", () => {
   const toast = useToast();
@@ -56,11 +55,21 @@ export const useCategoryStore = defineStore("category", () => {
     return categories.value.map((c) => c.name);
   });
 
+  const expenseCategories = computed(() => {
+    return categories.value.filter((cat) => cat.type === "Expense");
+  });
+
+  const incomeCategories = computed(() => {
+    return categories.value.filter((cat) => cat.type === "Income");
+  });
+
   return {
     categories,
     category,
     catNameList,
     fetchCategories,
-    createCategpry
+    createCategpry,
+    expenseCategories,
+    incomeCategories
   };
 });
