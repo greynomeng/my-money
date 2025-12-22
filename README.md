@@ -1,6 +1,7 @@
 # TODO
 
-- Categories!!!
+- Categories Expense tree
+- Contest menu to add/delete category
 - Convert models to store currency amounts as integer cents
   Convert in store.
 

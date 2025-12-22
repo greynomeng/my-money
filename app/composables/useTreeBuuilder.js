@@ -5,6 +5,7 @@ export const useTreeBuilder = () => {
       .map((item) => ({
         ...item,
         label: item.name,
+        onSelect: (e) => handleSelect(e),
         children: buildTree(items, item._id)
       }));
   };

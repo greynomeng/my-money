@@ -1,6 +1,4 @@
 <script setup>
-import { header } from "#build/ui";
-
 const accountStore = useAccountStore();
 accountStore.fetchAccounts();
 
