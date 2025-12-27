@@ -26,7 +26,6 @@ export const useCategoryStore = defineStore("category", () => {
   }
 
   async function createCategpry(data) {
-    console.log(data);
     loading.value = true;
     try {
       const response = await $fetch("/api/categories", {
@@ -50,6 +49,24 @@ export const useCategoryStore = defineStore("category", () => {
     }
   }
 
+  async function deleteCategory(id) {
+    try {
+      await $fetch(`/api/categories/${id}`, {
+        method: "DELETE"
+      });
+
+      toast.add({
+        title: "Success",
+        description: "Category deleted.",
+        color: "success"
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      await fetchCategories();
+    }
+  }
+
   // getters
   const catNameList = computed(() => {
     return categories.value.map((c) => c.name);
@@ -60,6 +77,7 @@ export const useCategoryStore = defineStore("category", () => {
     category,
     catNameList,
     fetchCategories,
-    createCategpry
+    createCategpry,
+    deleteCategory
   };
 });

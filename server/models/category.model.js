@@ -1,20 +1,24 @@
-import { defineMongooseModel } from "#nuxt/mongoose";
 import mongoose from "mongoose";
 
-export const Category = defineMongooseModel({
-  name: "Category",
-  schema: {
+export const CategorySchema = new mongoose.Schema(
+  {
+    _id: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
-    parent: {
-      type: mongoose.Types.ObjectId
+    path: {
+      type: String,
+      defualt: ""
     }
   },
-  options: {
+  {
     // timestamps: true,
     collection: "categories"
   }
-});
+);
+
+export const Category = mongoose.model("Category", CategorySchema);

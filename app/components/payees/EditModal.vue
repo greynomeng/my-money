@@ -40,12 +40,7 @@ const onCancel = async () => {
 <template>
   <UModal v-model:open="open" title="Edit payee" description="Update payee">
     <template #body>
-      <UForm
-        :schema="schema"
-        :state="props.payee"
-        class="space-y-4"
-        @submit="onSubmit"
-      >
+      <UForm :schema="schema" :state="props.payee" class="space-y-4">
         <UFormField label="Payee Name" placeholder="xxx-xxx" name="name">
           <UInput v-model="payee.name" class="w-full" />
         </UFormField>

@@ -98,15 +98,6 @@ const onContextMenu = (_e, row) => {
             @contextmenu="onContextMenu"
             :ui="{ tr: 'h-6' }"
           >
-            <!-- <template #action-cell="{ row }">
-            <UDropdownMenu :items="getDropdownActions(row.original)">
-              <UButton
-                icon="i-lucide-ellipsis-vertical"
-                color="neutral"
-                variant="ghost"
-              />
-            </UDropdownMenu>
-          </template> -->
           </UTable>
         </UContextMenu>
       </div>
