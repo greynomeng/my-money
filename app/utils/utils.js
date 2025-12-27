@@ -5,14 +5,19 @@ export const buildList = (items) => {
 };
 
 // Function to build tree from flat array with materialized paths
-export const buildTree = (items) => {
+export const buildTree = (items, expanded = false) => {
   // Map to hold references to all nodes, keyed by their _id
   const nodes = {};
   const tree = [];
 
   items.forEach((item) => {
     // Initialize the node structure with a children array
-    nodes[item.name] = { ...item, label: item.name, children: [] };
+    nodes[item.name] = {
+      ...item,
+      label: item.name,
+      defaultExpanded: expanded,
+      children: []
+    };
   });
 
   items.forEach((item) => {

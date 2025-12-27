@@ -5,7 +5,7 @@ import { useCategoryStore } from "#imports";
 const categoryStore = useCategoryStore();
 await categoryStore.fetchCategories();
 
-const treeItems = buildTree(categoryStore.categories);
+const treeItems = buildTree(categoryStore.categories, true);
 </script>
 
 <template>
