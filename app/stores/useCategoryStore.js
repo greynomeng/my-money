@@ -45,6 +45,7 @@ export const useCategoryStore = defineStore("category", () => {
         color: "error"
       });
     } finally {
+      fetchCategories();
       loading.value = false;
     }
   }

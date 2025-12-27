@@ -1,7 +1,10 @@
 export const buildList = (items) => {
   return items
-    .sort((a, b) => a.name - b.name)
-    .map((item) => (item.path ? `${item.path}:${item.name}` : item.name));
+    .map(
+      (item) =>
+        (item.path = item.path ? `${item.path}:${item.name}` : item.name)
+    )
+    .sort();
 };
 
 // Function to build tree from flat array with materialized paths

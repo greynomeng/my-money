@@ -21,8 +21,6 @@ const onSubmit = () => {
     categoryStore.createCategpry(state);
   } catch (error) {
     console.log(error.message);
-  } finally {
-    categoryStore.fetchCategories();
   }
   open.value = false;
 };
@@ -38,7 +36,7 @@ const onSubmit = () => {
 
     <template #body>
       <UForm :schema="schema" :state="state">
-        <UFormField label="Select parent category">
+        <UFormField label="Select parent category" class="mb-8">
           <USelectMenu :items="treeList" v-model="state.path" class="w-full" />
         </UFormField>
         <UFormField label="New category name" name="name" class="mb-8">

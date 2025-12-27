@@ -24,7 +24,7 @@ const treeItems = buildTree(categoryStore.categories, true);
 
     <template #body>
       <div class="flex">
-        <UTree :default-expanded="defaultExpandedItems" :items="treeItems" />
+        <UTree :items="treeItems" />
       </div>
     </template>
   </UDashboardPanel>

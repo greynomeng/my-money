@@ -2,17 +2,14 @@ import mongoose from "mongoose";
 
 export const CategorySchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: true
-    },
     name: {
       type: String,
       required: true
     },
     path: {
       type: String,
-      defualt: ""
+      index: true,
+      defualt: null
     }
   },
   {
