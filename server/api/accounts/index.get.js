@@ -3,6 +3,7 @@ import { Account } from "#imports";
 export default defineEventHandler(async (event) => {
   try {
     const accounts = await Account.find().sort({ name: 1 });
+
     return {
       statusCode: 200,
       data: accounts

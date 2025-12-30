@@ -13,6 +13,7 @@ export const useAccountStore = defineStore("account", () => {
     loading.value = true;
     try {
       const response = await $fetch("/api/accounts");
+
       accounts.value = response.data;
     } catch (error) {
       toast.add({
@@ -51,8 +52,12 @@ export const useAccountStore = defineStore("account", () => {
   }
 
   async function updateAccount(data) {
+    // Convert balances to cents
+    data.openingBalanceCents = data.openingBalance * 100;
+    data.currentBalanceCents = data.currentBalance * 100;
+
     try {
-      const response = await $fetch(`/api/accounts/${data.id}`, {
+      const response = await $fetch(`/api/accounts/${data._id}`, {
         method: "PUT",
         body: data
       });

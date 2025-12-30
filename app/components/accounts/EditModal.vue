@@ -17,18 +17,29 @@ const schema = z.object({
   name: z.string(),
   owner: z.string(),
   type: z.string(),
-  openingBalance: z.string(), // until decimal number entry fixed
+  openingBalance: z.number().multipleOf(0.01), // until decimal number entry fixed
   currentBalance: z.number().multipleOf(0.01)
 });
 
 const open = ref(false);
 
+const state = reactive(props.account);
+// const state = reactive({
+//   accNo: props.account.accNo,
+//   name: props.account.name,
+//   owner: props.account.owner,
+//   type: props.account.type,
+//   openingBalance: props.account.openingBalance,
+//   currentBalance: props.account.currentBalance
+// });
+
 const toast = useToast();
 
 async function onSubmit(event) {
+  console.log("onSubmit(event):", state);
   // Update account
   try {
-    accountStore.updateAccount(props.account);
+    accountStore.updateAccount(state);
   } catch (error) {
     console.log(error.message);
   } finally {
@@ -57,17 +68,17 @@ const onCancel = async () => {
         @submit="onSubmit"
       >
         <UFormField label="Account No." placeholder="xxx-xxx" name="accno">
-          <UInput v-model="account.accNo" class="w-full" />
+          <UInput v-model="state.accNo" class="w-full" />
         </UFormField>
         <UFormField label="Account Name" placeholder="xxx-xxx" name="name">
-          <UInput v-model="account.name" class="w-full" />
+          <UInput v-model="state.name" class="w-full" />
         </UFormField>
         <UFormField label="Owner(s)" placeholder="xxx-xxx" name="owner">
-          <UInput v-model="account.owner" class="w-full" />
+          <UInput v-model="state.owner" class="w-full" />
         </UFormField>
         <UFormField label="Account Type" placeholder="xxx-xxx" name="type">
           <USelect
-            v-model="account.type"
+            v-model="state.type"
             :items="['Asset', 'Liability']"
             class="w-full"
           />
@@ -77,9 +88,18 @@ const onCancel = async () => {
           placeholder="xxx-xxx"
           name="acc_opening_balance"
         >
-          <UInput
-            type="number"
-            v-model="account.openingBalance"
+          <UInputNumber
+            v-model="state.openingBalance"
+            :format-options="{
+              style: 'currency',
+              currency: 'AUD', // Use your desired currency code
+              minimumFractionDigits: 2, // Default for currency, but good to be explicit
+              maximumFractionDigits: 2
+            }"
+            :step="0.01"
+            :increment="false"
+            :decrement="false"
+            icon="i-lucide-dollar-sign"
             class="w-full"
           />
         </UFormField>
@@ -88,34 +108,22 @@ const onCancel = async () => {
           placeholder="xxx-xxx"
           name="acc_current_balance"
         >
-          <UInput
-            type="number"
-            v-model="account.currentBalance"
+          <UInputNumber
+            v-model="state.currentBalance"
+            :format-options="{
+              style: 'currency',
+              currency: 'AUD', // Use your desired currency code
+              minimumFractionDigits: 2, // Default for currency, but good to be explicit
+              maximumFractionDigits: 2
+            }"
+            :step="0.01"
+            :increment="false"
+            :decrement="false"
+            icon="i-lucide-dollar-sign"
             class="w-full"
           />
         </UFormField>
-        <!-- 
-          Decimal/Currency loose the decimal bits
-          Use string instead and convert programmatically
-          -->
-        <!--   <UFormField
-            label="Opening Balance"
-            placeholder="xxx-xxx"
-            name="acc_opening_balance"
-          >    
-          <UInputNumber
-            v-model="state.acc_opening_balance"
-            :format-options="{
-              signDisplay: 'exceptZero',
-              style: 'currency',
-              currency: 'AUD',
-              currencyDisplay: 'code',
-              currencySign: 'accounting',
-              minimumFractionDigits: 2
-            }"
-            class="w-full"
-          /> 
-        </UFormField>-->
+
         <div class="flex justify-end gap-2">
           <UButton
             label="Cancel"
@@ -128,7 +136,6 @@ const onCancel = async () => {
             color="primary"
             variant="solid"
             type="submit"
-            @click="onSubmit"
           />
         </div>
       </UForm>

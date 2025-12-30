@@ -1,6 +1,5 @@
 <script setup>
 import * as z from "zod";
-import { useAccountStore } from "#imports";
 
 const accountStore = useAccountStore();
 
@@ -9,8 +8,8 @@ const schema = z.object({
   name: z.string(),
   owner: z.string(),
   type: z.string(),
-  openingBalance: z.string(),
-  currentBalance: z.string()
+  openingBalance: z.number().multipleOf(0.01),
+  currentBalance: z.number().multipleOf(0.01)
 });
 
 const open = ref(false);
@@ -20,8 +19,8 @@ const state = reactive({
   name: "",
   owner: "",
   type: "",
-  openingBalance: "",
-  currentBalance: ""
+  openingBalance: null,
+  currentBalance: null
 });
 
 const resetForm = () => {
@@ -29,8 +28,8 @@ const resetForm = () => {
   state.name = "";
   state.owner = "";
   state.type = "";
-  state.openingBalance = "";
-  state.currentBalance = "";
+  state.openingBalance = null;
+  state.currentBalance = null;
 };
 
 const toast = useToast();
@@ -82,14 +81,40 @@ async function onSubmit(event) {
           placeholder="xxx-xxx"
           name="openingBalance"
         >
-          <UInput v-model="state.openingBalance" class="w-full" />
+          <UInputNumber
+            v-model="state.openingBalance"
+            :format-options="{
+              style: 'currency',
+              currency: 'AUD', // Use your desired currency code
+              minimumFractionDigits: 2, // Default for currency, but good to be explicit
+              maximumFractionDigits: 2
+            }"
+            :step="0.01"
+            :increment="false"
+            :decrement="false"
+            icon="i-lucide-dollar-sign"
+            class="w-full"
+          />
         </UFormField>
         <UFormField
           label="Current Balance"
           placeholder="xxx-xxx"
           name="currentBalance"
         >
-          <UInput v-model="state.currentBalance" class="w-full" />
+          <UInputNumber
+            v-model="state.currentBalance"
+            :format-options="{
+              style: 'currency',
+              currency: 'AUD', // Use your desired currency code
+              minimumFractionDigits: 2, // Default for currency, but good to be explicit
+              maximumFractionDigits: 2
+            }"
+            :step="0.01"
+            :increment="false"
+            :decrement="false"
+            icon="i-lucide-dollar-sign"
+            class="w-full"
+          />
         </UFormField>
         <!-- 
           Decimal/Currency loose the decimal bits

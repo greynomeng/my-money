@@ -3,7 +3,7 @@ import { Account } from "#imports";
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   const body = await readBody(event);
-
+  console.log("body:", body);
   try {
     const updatedAccount = await Account.findByIdAndUpdate(id, body);
     return {

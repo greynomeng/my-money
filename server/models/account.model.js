@@ -37,7 +37,7 @@ const AccountSchema = new mongoose.Schema(
 // --- Virtuals for Dollar Representation ---
 AccountSchema.virtual("openingBalance").get(function () {
   // Return a formatted dollar amount (e.g., "12.34")
-  return (this.openingBalanceCents / 100).toFixed(2);
+  return parseFloat((this.openingBalanceCents / 100).toFixed(2));
 });
 
 // A virtual property 'amount' that sets the 'amountCents' value from a dollar input
@@ -48,7 +48,7 @@ AccountSchema.virtual("openingBalance").set(function (dollarValue) {
 
 AccountSchema.virtual("currentBalance").get(function () {
   // Return a formatted dollar amount (e.g., "12.34")
-  return (this.currentBalanceCents / 100).toFixed(2);
+  return parseFloat((this.currentBalanceCents / 100).toFixed(2));
 });
 
 // A virtual property 'amount' that sets the 'amountCents' value from a dollar input

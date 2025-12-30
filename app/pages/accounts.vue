@@ -1,6 +1,5 @@
 <script setup>
-import { AccountsEditModal } from "#components";
-import { useAccountStore } from "#imports";
+import { AccountsAddModal, AccountsEditModal } from "#components";
 
 const accountStore = useAccountStore();
 
@@ -67,7 +66,6 @@ const treeItems = ref([
     </template>
 
     <template #body>
-      <pre>{{ useAccountStore.accounts }}</pre>
       <div class="flex">
         <UTree :items="treeItems" />
       </div>
