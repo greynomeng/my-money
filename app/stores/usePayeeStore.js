@@ -59,7 +59,6 @@ export const usePayeeStore = defineStore("payee", () => {
         method: "PUT",
         body: data
       });
-      fetchPayees();
 
       toast.add({
         title: "Success",

@@ -8,8 +8,6 @@ const { payees } = storeToRefs(payeeStore);
 
 await payeeStore.fetchPayees();
 
-// const data = payees;
-
 const columns = [
   {
     accessorKey: "name",

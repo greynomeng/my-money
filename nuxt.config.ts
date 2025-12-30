@@ -11,5 +11,10 @@ export default defineNuxtConfig({
     options: {},
     modelsDir: "models",
     devtools: true
+  },
+
+  typescript: {
+    // typeCheck: true,
+    strict: false
   }
 });

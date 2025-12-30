@@ -10,8 +10,8 @@ export const buildList = (items) => {
 // Function to build tree from flat array with materialized paths
 export const buildTree = (items, expanded = false) => {
   // Map to hold references to all nodes, keyed by their _id
-  const nodes = {};
-  const tree = [];
+  const nodes = ref({});
+  const tree = ref([]);
 
   items.forEach((item) => {
     // Initialize the node structure with a children array
@@ -29,7 +29,7 @@ export const buildTree = (items, expanded = false) => {
 
     if (parentPath === null || parentPath === undefined) {
       // Root node has no parent path, so add it to the main tree array
-      tree.push(node);
+      tree.value.push(node);
     } else {
       // Extract the parent ID from the path string
       // Example path: ",Books,Programming," -> parent IDs: ["Books", "Programming"]

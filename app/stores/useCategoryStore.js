@@ -26,11 +26,13 @@ export const useCategoryStore = defineStore("category", () => {
   }
 
   async function createCategpry(data) {
+    const { name, path } = data;
+
     loading.value = true;
     try {
-      const response = await $fetch("/api/categories", {
+      const { response } = await $fetch("/api/categories", {
         method: "POST",
-        body: data
+        body: { name, path }
       });
 
       toast.add({
@@ -45,7 +47,8 @@ export const useCategoryStore = defineStore("category", () => {
         color: "error"
       });
     } finally {
-      fetchCategories();
+      await categories.value.push({ name, path });
+      await fetchCategories();
       loading.value = false;
     }
   }
