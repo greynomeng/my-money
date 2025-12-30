@@ -16,12 +16,14 @@ const open = ref(false);
 
 const treeList = buildList(categoryStore.categories);
 
-const onSubmit = () => {
+const onSubmit = async () => {
   try {
     categoryStore.createCategpry(state);
   } catch (error) {
     console.log(error.message);
   }
+  await nextTick();
+  await categoryStore.fetchCategories();
   open.value = false;
 };
 </script>

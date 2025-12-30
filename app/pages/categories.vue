@@ -5,7 +5,19 @@ import { useCategoryStore } from "#imports";
 const categoryStore = useCategoryStore();
 await categoryStore.fetchCategories();
 
-const treeItems = buildTree(categoryStore.categories, true);
+const catLength = computed(() => {
+  return categoryStore.categories.length;
+});
+
+let treeItems = buildTree(categoryStore.categories, true);
+
+watch(catLength, async (newValue, oldValue) => {
+  console.log("newValue:", newValue, "- oldValue:", oldValue);
+
+  await nextTick();
+  await categoryStore.fetchCategories();
+  treeItems = buildTree(categoryStore.categories, true);
+});
 </script>
 
 <template>

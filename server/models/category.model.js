@@ -9,7 +9,7 @@ export const CategorySchema = new mongoose.Schema(
     path: {
       type: String,
       index: true,
-      defualt: null
+      default: null
     }
   },
   {

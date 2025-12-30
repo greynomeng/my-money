@@ -9,7 +9,7 @@ defineProps({
 
 const categoryStore = useCategoryStore();
 categoryStore.fetchCategories();
-const treeItems = buildTreeFromPaths(categoryStore.catNameList);
+const listItems = buildList(categoryStore.categories);
 
 const schema = z.object({
   date: z.string(),
@@ -39,7 +39,7 @@ const state = reactive({
     <template #body>
       <UForm :schema="state" :state="state" @submit="onSubmit">
         <UFormField label="Category">
-          <UTree :items="treeItems" />
+          <USelectMenu :items="listItems" v-model="state.path" class="w-full" />
         </UFormField>
       </UForm>
     </template>

@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { name, path } = body;
 
+  console.log("name:", name, " - path:", path);
   try {
     if (!name) {
       throw createError({
