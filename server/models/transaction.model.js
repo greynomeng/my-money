@@ -30,6 +30,11 @@ const TransactionSchema = new mongoose.Schema(
       type: Number,
       required: true
     },
+    status: {
+      // Cleared, Reconciled, Not Reconciled
+      type: String,
+      required: true
+    },
     memo: {
       type: String
     }
